@@ -1,34 +1,32 @@
-'use strict';
+const $ = require('gulp-load-plugins')();
 
-var $ = require('gulp-load-plugins')();
+const prependFile = require('prepend-file');
 
-var prependFile = require('prepend-file');
-
-var projectSetup = require('setup/setup');
+const projectSetup = require('setup/setup');
 
 module.exports = function (cb) {
-  var env = this.opts.env;
+  const env = this.opts.env;
 
-  var setup = projectSetup(env);
-  var assets = setup.assets;
+  const setup = projectSetup(env);
+  const assets = setup.assets;
 
-  var commandAdd = ['add', assets.dist].join(' ');
-  var argsStatus = ['--porcelain', '--', assets.dist].join(' ');
+  const commandAdd = ['add', assets.dist].join(' ');
+  const argsStatus = ['--porcelain', '--', assets.dist].join(' ');
 
-  var optionsExec = setup.plugins.exec;
+  const optionsExec = setup.plugins.exec;
 
   $.git.exec({
     args: commandAdd,
     maxBuffer: optionsExec.maxBuffer
-  }, function (err) {
+  }, err => {
     if (err) {
       return cb(err);
     }
     $.git.status({
       args: argsStatus,
       maxBuffer: optionsExec.maxBuffer
-    }, function (err2, stdout) {
-      var message = setup.getChangelog(stdout);
+    }, (err2, stdout) => {
+      const message = setup.getChangelog(stdout);
       if (err2) {
         return $.git.reset('HEAD', cb);
       }

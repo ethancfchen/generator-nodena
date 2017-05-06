@@ -1,16 +1,14 @@
-'use strict';
+const gulp = require('gulp');
+const $ = require('gulp-load-plugins')();
 
-var gulp = require('gulp');
-var $ = require('gulp-load-plugins')();
+const del = require('del');
 
-var del = require('del');
-
-var projectSetup = require('setup/setup');
+const projectSetup = require('setup/setup');
 
 module.exports = function (cb) {
-  var setup = projectSetup({env: 'live'});
-  var assets = setup.assets;
-  var files = [
+  const setup = projectSetup({env: 'live'});
+  const assets = setup.assets;
+  const files = [
     assets.changelog,
     assets.readme,
     './*.js',

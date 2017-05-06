@@ -1,33 +1,31 @@
-'use strict';
+const fs = require('fs');
+const moment = require('moment');
 
-var fs = require('fs');
-var moment = require('moment');
+const MANIFEST = 'package.json';
+const PREFERENCE = 'setup.json';
+const README = 'README.md';
+const CHANGELOG = 'CHANGELOG.md';
 
-var MANIFEST = 'package.json';
-var PREFERENCE = 'setup.json';
-var README = 'README.md';
-var CHANGELOG = 'CHANGELOG.md';
-
-var BASE = {
+const BASE = {
   src: 'src/',
   temp: 'dist/',
   online: 'online/',
   res: 'res/'
 };
 
-var ONLINE = {
+const ONLINE = {
   stage: BASE.online + 'stage/',
   live: BASE.online + 'live/',
   patches: BASE.online + 'patches/'
 };
-var DIST = {
+const DIST = {
   local: BASE.temp,
   bypass: BASE.temp,
   stage: ONLINE.stage,
   live: ONLINE.live
 };
 
-var TEMPLATE = {
+const TEMPLATE = {
   changelog: BASE.res + 'changelog.template.md'
 };
 
@@ -44,10 +42,10 @@ function getPreference() {
 }
 
 function getDomain(config) {
-  var LOCALHOST = 'http://localhost';
-  var pref = getPreference();
-  var prefEnv = pref[config.env] || {};
-  var localUrl = LOCALHOST + ':' + (config.argv.port || pref.server.port);
+  const LOCALHOST = 'http://localhost';
+  const pref = getPreference();
+  const prefEnv = pref[config.env] || {};
+  const localUrl = LOCALHOST + ':' + (config.argv.port || pref.server.port);
 
   return prefEnv.domain || {
     local: localUrl,
@@ -64,9 +62,9 @@ function readJsonFile(path) {
 }
 
 function generateChangelog(log) {
-  var template = readFile(TEMPLATE.changelog);
-  var version = getPackageJsonVersion();
-  var now = moment().format();
+  const template = readFile(TEMPLATE.changelog);
+  const version = getPackageJsonVersion();
+  const now = moment().format();
   return template.replace('{version}', version)
     .replace('{now}', now)
     .replace('{log}', log);
@@ -84,9 +82,9 @@ module.exports = function (config) {
     online: ONLINE,
     domain: getDomain(config),
 
-    isFileExist: isFileExist,
-    getPreference: getPreference,
-    getPackageJsonVersion: getPackageJsonVersion,
-    generateChangelog: generateChangelog
+    isFileExist,
+    getPreference,
+    getPackageJsonVersion,
+    generateChangelog
   };
 };

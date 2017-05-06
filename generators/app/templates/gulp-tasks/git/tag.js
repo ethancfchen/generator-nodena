@@ -1,17 +1,15 @@
-'use strict';
+const $ = require('gulp-load-plugins')();
 
-var $ = require('gulp-load-plugins')();
-
-var projectSetup = require('setup/setup');
+const projectSetup = require('setup/setup');
 
 module.exports = function () {
-  var env = this.opts.env;
+  const env = this.opts.env;
 
-  var setup = projectSetup(env);
+  const setup = projectSetup(env);
 
-  var version = setup.getVersion();
+  const version = setup.getVersion();
 
-  var optionsExec = setup.plugins.exec;
+  const optionsExec = setup.plugins.exec;
 
   $.git.tag(version, '[Online] Tag: ' + version, {
     maxBuffer: optionsExec.maxBuffer

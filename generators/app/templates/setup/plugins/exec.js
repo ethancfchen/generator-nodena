@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * Plugin Setup: Common executions
  *
@@ -14,7 +12,7 @@
  * @return {object} Plugins options.
  */
 module.exports = function () {
-  var options = {
+  const options = {
     maxBuffer: 1024 * 1024
   };
   return options;

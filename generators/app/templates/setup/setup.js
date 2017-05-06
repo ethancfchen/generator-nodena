@@ -1,11 +1,9 @@
-'use strict';
+const fs = require('fs');
+const path = require('path');
 
-var fs = require('fs');
-var path = require('path');
+const argv = require('./argv');
 
-var argv = require('./argv');
-
-var IS_ONLINE = {
+const IS_ONLINE = {
   local: false,
   bypass: true,
   stage: true,
@@ -13,7 +11,7 @@ var IS_ONLINE = {
 };
 
 function getComponent(fileName) {
-  var file = path.resolve(__dirname, fileName + '.js');
+  const file = path.resolve(__dirname, fileName + '.js');
 
   if (fs.existsSync(file)) {
     return require('./' + fileName);
@@ -28,18 +26,18 @@ function getVersion(assets) {
 }
 
 module.exports = function (env) {
-  var config = {
+  const config = {
     env: env || argv.env || 'local',
-    argv: argv
+    argv
   };
-  var assets = getComponent('assets')(config);
-  var plugins = getComponent('plugins')(config, assets);
+  const assets = getComponent('assets')(config);
+  const plugins = getComponent('plugins')(config, assets);
 
   return {
     env: config.env,
 
-    assets: assets,
-    plugins: plugins,
+    assets,
+    plugins,
 
     isLocal: !IS_ONLINE[config.env],
     isOnline: IS_ONLINE[config.env],

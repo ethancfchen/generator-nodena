@@ -1,5 +1,3 @@
-'use strict';
-
 module.exports = require('yargs').option({
   b: {
     alias: 'verbose'

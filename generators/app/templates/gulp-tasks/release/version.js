@@ -1,17 +1,15 @@
-'use strict';
+const gulp = require('gulp');
+const $ = require('gulp-load-plugins')();
 
-var gulp = require('gulp');
-var $ = require('gulp-load-plugins')();
-
-var projectSetup = require('setup/setup');
+const projectSetup = require('setup/setup');
 
 module.exports = function () {
-  var env = this.opts.env;
+  const env = this.opts.env;
 
-  var setup = projectSetup(env);
-  var assets = setup.assets;
+  const setup = projectSetup(env);
+  const assets = setup.assets;
 
-  var options = setup.plugins.gulpBump;
+  const options = setup.plugins.gulpBump;
 
   return gulp
     .src(assets.manifest)

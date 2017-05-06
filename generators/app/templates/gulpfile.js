@@ -1,12 +1,10 @@
-'use strict';
+const gulp = require('gulp');
+const $ = require('gulp-load-plugins')();
 
-var gulp = require('gulp');
-var $ = require('gulp-load-plugins')();
+const fs = require('fs');
+const path = require('path');
 
-var fs = require('fs');
-var path = require('path');
-
-var PATH_TASK_LOADER = 'gulptasks.js';
+const PATH_TASK_LOADER = 'gulptasks.js';
 
 require('rootpath')();
 

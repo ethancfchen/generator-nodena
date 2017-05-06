@@ -1,38 +1,36 @@
-'use strict';
+const gulp = require('gulp');
+const $ = require('gulp-load-plugins')();
 
-var gulp = require('gulp');
-var $ = require('gulp-load-plugins')();
+const _ = require('lodash');
+const path = require('path');
 
-var _ = require('lodash');
-var path = require('path');
-
-var projectSetup = require('setup/setup');
+const projectSetup = require('setup/setup');
 
 module.exports = function (cb) {
-  var env = this.opts.env;
+  const env = this.opts.env;
 
-  var setup = projectSetup(env);
-  var assets = setup.assets;
+  const setup = projectSetup(env);
+  const assets = setup.assets;
 
-  var version = setup.getVersion();
-  var command = [
+  const version = setup.getVersion();
+  const command = [
     'diff-tree', '-r', '--name-only', '--no-commit-id',
     'HEAD', '--', assets.dist
   ].join(' ');
 
-  var optionsExec = setup.plugins.exec;
+  const optionsExec = setup.plugins.exec;
 
   $.git.exec({
     args: command,
     maxBuffer: optionsExec.maxBuffer
-  }, function (err, stdout) {
-    var files = [];
+  }, (err, stdout) => {
+    let files = [];
     if (err) {
       return cb(err);
     }
     files = _(stdout.split('\n'))
       .compact()
-      .map(function (item) {
+      .map(item => {
         return item.replace(assets.dist, '**');
       })
       .value();

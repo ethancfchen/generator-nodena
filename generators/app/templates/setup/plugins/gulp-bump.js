@@ -1,12 +1,10 @@
-'use strict';
-
 /**
  * Plugin Setup: gulp-bump
  *
  * @module setup/plugins/gulp-bump
  */
 
-var semver = require('semver');
+const semver = require('semver');
 
 /**
  * Plugin Setup: gulp-bump
@@ -20,14 +18,20 @@ var semver = require('semver');
  * @return {object}        Plugins options.
  */
 module.exports = function (config, assets) {
-  var env = config.env;
-  var inputVer = config.argv.version;
-  var currentVer = assets.getPackageJsonVersion();
+  const env = config.env;
+  const inputVer = config.argv.version;
+  const currentVer = assets.getPackageJsonVersion();
 
-  var liveVer = inputVer;
-  var options = {
-    stage: {type: 'prerelease', preid: 'stage'},
-    live: {version: liveVer}
+  let liveVer = inputVer;
+
+  const options = {
+    stage: {
+      type: 'prerelease',
+      preid: 'stage'
+    },
+    live: {
+      version: liveVer
+    }
   };
 
   switch (inputVer) {
@@ -41,7 +45,11 @@ module.exports = function (config, assets) {
       liveVer = semver.inc(currentVer, 'major');
       break;
     default:
-      liveVer = semver.valid(inputVer) ? inputVer : semver.inc(currentVer, 'patch');
+      if (semver.valid(inputVer)) {
+        liveVer = inputVer;
+      } else {
+        liveVer = semver.inc(currentVer, 'patch');
+      }
   }
   options.live.version = liveVer;
 
