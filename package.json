@@ -1,6 +1,6 @@
 {
   "name": "generator-nodena",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Nodena basic Yeoman generator",
   "homepage": "https://github.com/ethancfchen/generator-nodena",
   "author": {
