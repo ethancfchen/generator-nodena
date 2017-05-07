@@ -36,7 +36,7 @@ const appAssets = [
   'package.json',
 ];
 
-describe('generator-bombyx:app', () => {
+describe('generator-nodena:app', () => {
   beforeAll(() => {
     return helpers
       .run(path.join(__dirname, '../generators/app'));
