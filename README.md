@@ -29,11 +29,11 @@ yo nodena
 *   Yeoman has a heart of gold.
 *   Yeoman is a person with feelings and opinions, but is very easy to work with.
 *   Yeoman can be too opinionated at times but is easily convinced not to be.
- *   Feel free to [learn more about Yeoman](http://yeoman.io/).
+*   Feel free to [learn more about Yeoman](http://yeoman.io/).
 
 ## License
 
-MIT © [ethancfchen]()
+MIT © [ethancfchen](https://github.com/ethancfchen)
 
 [npm-image]: https://badge.fury.io/js/generator-nodena.svg
 [npm-url]: https://npmjs.org/package/generator-nodena
