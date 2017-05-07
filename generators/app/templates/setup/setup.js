@@ -7,7 +7,7 @@ const IS_ONLINE = {
   local: false,
   bypass: true,
   stage: true,
-  live: true
+  live: true,
 };
 
 function getComponent(fileName) {
@@ -20,15 +20,15 @@ function getComponent(fileName) {
 }
 
 function getVersion(assets) {
-  return function () {
+  return function() {
     return 'v' + assets.getPackageJsonVersion();
   };
 }
 
-module.exports = function (env) {
+module.exports = function(env) {
   const config = {
     env: env || argv.env || 'local',
-    argv
+    argv,
   };
   const assets = getComponent('assets')(config);
   const plugins = getComponent('plugins')(config, assets);
@@ -46,6 +46,6 @@ module.exports = function (env) {
 
     getPreference: assets.getPreference,
     getVersion: getVersion(assets),
-    getChangelog: assets.generateChangelog
+    getChangelog: assets.generateChangelog,
   };
 };

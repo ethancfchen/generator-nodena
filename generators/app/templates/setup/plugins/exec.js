@@ -11,9 +11,9 @@
  * var exec = require('./plugins/exec')();
  * @return {object} Plugins options.
  */
-module.exports = function () {
+module.exports = function() {
   const options = {
-    maxBuffer: 1024 * 1024
+    maxBuffer: 1024 * 1024,
   };
   return options;
 };

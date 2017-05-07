@@ -2,7 +2,7 @@ const $ = require('gulp-load-plugins')();
 
 const projectSetup = require('setup/setup');
 
-module.exports = function () {
+module.exports = function() {
   const env = this.opts.env;
 
   const setup = projectSetup(env);
@@ -12,6 +12,6 @@ module.exports = function () {
   const optionsExec = setup.plugins.exec;
 
   $.git.tag(version, '[Online] Tag: ' + version, {
-    maxBuffer: optionsExec.maxBuffer
+    maxBuffer: optionsExec.maxBuffer,
   });
 };

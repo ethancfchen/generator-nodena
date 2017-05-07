@@ -10,23 +10,23 @@ const BASE = {
   src: 'src/',
   temp: 'dist/',
   online: 'online/',
-  res: 'res/'
+  res: 'res/',
 };
 
 const ONLINE = {
   stage: BASE.online + 'stage/',
   live: BASE.online + 'live/',
-  patches: BASE.online + 'patches/'
+  patches: BASE.online + 'patches/',
 };
 const DIST = {
   local: BASE.temp,
   bypass: BASE.temp,
   stage: ONLINE.stage,
-  live: ONLINE.live
+  live: ONLINE.live,
 };
 
 const TEMPLATE = {
-  changelog: BASE.res + 'changelog.template.md'
+  changelog: BASE.res + 'changelog.template.md',
 };
 
 function isFileExist(path) {
@@ -49,7 +49,7 @@ function getDomain(config) {
 
   return prefEnv.domain || {
     local: localUrl,
-    bypass: localUrl
+    bypass: localUrl,
   }[config.env];
 }
 
@@ -70,7 +70,7 @@ function generateChangelog(log) {
     .replace('{log}', log);
 }
 
-module.exports = function (config) {
+module.exports = function(config) {
   return {
     manifest: MANIFEST,
     readme: README,
@@ -85,6 +85,6 @@ module.exports = function (config) {
     isFileExist,
     getPreference,
     getPackageJsonVersion,
-    generateChangelog
+    generateChangelog,
   };
 };

@@ -5,7 +5,7 @@ const del = require('del');
 
 const projectSetup = require('setup/setup');
 
-module.exports = function (cb) {
+module.exports = function(cb) {
   const setup = projectSetup({env: 'live'});
   const assets = setup.assets;
   const files = [
@@ -13,7 +13,7 @@ module.exports = function (cb) {
     assets.readme,
     './*.js',
     './setup/**/*.js',
-    './src/js/**/*.js'
+    './src/js/**/*.js',
   ];
   del('./docs');
   gulp

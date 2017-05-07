@@ -3,7 +3,7 @@ const $ = require('gulp-load-plugins')();
 
 const projectSetup = require('setup/setup');
 
-module.exports = function () {
+module.exports = function() {
   const env = this.opts.env;
 
   const setup = projectSetup(env);

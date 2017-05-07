@@ -1,6 +1,6 @@
 const runSequence = require('run-sequence');
 
-module.exports = function () {
+module.exports = function() {
   this.opts.env = 'live';
   runSequence('main:live');
 };

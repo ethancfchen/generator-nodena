@@ -3,7 +3,7 @@ const $ = require('gulp-load-plugins')();
 
 const projectSetup = require('setup/setup');
 
-module.exports = function () {
+module.exports = function() {
   const env = this.opts.env;
 
   const setup = projectSetup(env);
@@ -16,9 +16,9 @@ module.exports = function () {
   return gulp
     .src([assets.dist, assets.manifest, assets.changelog])
     .pipe($.git.add({
-      maxBuffer: optionsExec.maxBuffer
+      maxBuffer: optionsExec.maxBuffer,
     }))
     .pipe($.git.commit('[Online] ' + version, {
-      maxBuffer: optionsExec.maxBuffer
+      maxBuffer: optionsExec.maxBuffer,
     }));
 };

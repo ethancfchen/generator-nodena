@@ -6,7 +6,7 @@ const path = require('path');
 
 const projectSetup = require('setup/setup');
 
-module.exports = function (cb) {
+module.exports = function(cb) {
   const env = this.opts.env;
 
   const setup = projectSetup(env);
@@ -15,14 +15,14 @@ module.exports = function (cb) {
   const version = setup.getVersion();
   const command = [
     'diff-tree', '-r', '--name-only', '--no-commit-id',
-    'HEAD', '--', assets.dist
+    'HEAD', '--', assets.dist,
   ].join(' ');
 
   const optionsExec = setup.plugins.exec;
 
   $.git.exec({
     args: command,
-    maxBuffer: optionsExec.maxBuffer
+    maxBuffer: optionsExec.maxBuffer,
   }, (err, stdout) => {
     let files = [];
     if (err) {
@@ -30,7 +30,7 @@ module.exports = function (cb) {
     }
     files = _(stdout.split('\n'))
       .compact()
-      .map(item => {
+      .map((item) => {
         return item.replace(assets.dist, '**');
       })
       .value();

@@ -4,7 +4,7 @@ const prependFile = require('prepend-file');
 
 const projectSetup = require('setup/setup');
 
-module.exports = function (cb) {
+module.exports = function(cb) {
   const env = this.opts.env;
 
   const setup = projectSetup(env);
@@ -17,14 +17,14 @@ module.exports = function (cb) {
 
   $.git.exec({
     args: commandAdd,
-    maxBuffer: optionsExec.maxBuffer
-  }, err => {
+    maxBuffer: optionsExec.maxBuffer,
+  }, (err) => {
     if (err) {
       return cb(err);
     }
     $.git.status({
       args: argsStatus,
-      maxBuffer: optionsExec.maxBuffer
+      maxBuffer: optionsExec.maxBuffer,
     }, (err2, stdout) => {
       const message = setup.getChangelog(stdout);
       if (err2) {
@@ -32,7 +32,7 @@ module.exports = function (cb) {
       }
       prependFile(assets.changelog, message);
       $.git.reset('HEAD', {
-        maxBuffer: optionsExec.maxBuffer
+        maxBuffer: optionsExec.maxBuffer,
       }, cb);
     });
   });
