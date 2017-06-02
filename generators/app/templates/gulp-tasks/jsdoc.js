@@ -3,10 +3,10 @@ const $ = require('gulp-load-plugins')();
 
 const del = require('del');
 
-const projectSetup = require('setup/setup');
+const Setup = require('setup/setup');
 
 module.exports = (cb) => {
-  const setup = projectSetup({env: 'live'});
+  const setup = new Setup({env: 'live'});
   const assets = setup.assets;
   const files = [
     assets.changelog,

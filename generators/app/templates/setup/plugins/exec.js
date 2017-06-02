@@ -11,9 +11,10 @@
  * var exec = require('./plugins/exec')();
  * @return {object} Plugins options.
  */
-module.exports = () => {
-  const options = {
-    maxBuffer: 1024 * 1024,
-  };
-  return options;
-};
+class PluginExec {
+  constructor(config, assets) {
+    this.maxBuffer = 1024 * 1024;
+  }
+}
+
+module.exports = PluginExec;

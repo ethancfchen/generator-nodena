@@ -4,16 +4,19 @@ const _ = require('lodash');
 
 const PATH_PLUGINS = '../plugins';
 
-module.exports = (config, assets) => {
-  const pluginPath = path.resolve(__dirname, PATH_PLUGINS);
-  const pluginFiles = fs.readdirSync(pluginPath);
-  const options = {};
+class Plugins {
+  constructor(config, assets) {
+    const pluginPath = path.resolve(__dirname, PATH_PLUGINS);
+    const pluginFiles = fs.readdirSync(pluginPath);
 
-  pluginFiles.forEach((pluginFile) => {
-    const name = _.camelCase(pluginFile.replace(/\..+$/, ''));
-    const file = path.resolve(pluginPath, pluginFile);
-    options[name] = require(file)(config, assets);
-  });
+    pluginFiles.forEach((pluginFile) => {
+      const name = _.camelCase(pluginFile.replace(/\..+$/, ''));
+      const file = path.resolve(pluginPath, pluginFile);
+      const Plugin = require(file);
 
-  return options;
-};
+      this[name] = new Plugin(config, assets);
+    });
+  }
+}
+
+module.exports = Plugins;

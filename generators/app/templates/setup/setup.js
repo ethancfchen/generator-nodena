@@ -10,7 +10,7 @@ const IS_ONLINE = {
   live: true,
 };
 
-function getComponent(fileName) {
+function getClass(fileName) {
   const file = path.resolve(__dirname, fileName + '.js');
 
   if (fs.existsSync(file)) {
@@ -19,33 +19,42 @@ function getComponent(fileName) {
   return require('./base/' + fileName);
 }
 
-function getVersion(assets) {
-  return function() {
-    return 'v' + assets.getPackageJsonVersion();
-  };
+class Setup {
+  constructor(env) {
+    const config = {
+      env: env || argv.env || 'local',
+      argv,
+    };
+    const Assets = getClass('assets');
+    const Plugins = getClass('plugins');
+
+    const assets = new Assets(config);
+    const plugins = new Plugins(config, assets);
+
+    this.env = config.env;
+
+    this.config = config;
+
+    this.assets = assets;
+    this.plugins = plugins;
+
+    this.isLocal = !IS_ONLINE[config.env];
+    this.isOnline = IS_ONLINE[config.env];
+    this.isVerbose = argv.verbose;
+    this.domain = assets.domain;
+  }
+
+  getPreference() {
+    return this.assets.getPreference();
+  }
+
+  getVersion() {
+    return 'v' + this.assets.getPackageJsonVersion();
+  }
+
+  getChangelog(log) {
+    return this.assets.generateChangelog(log);
+  }
 }
 
-module.exports = (env) => {
-  const config = {
-    env: env || argv.env || 'local',
-    argv,
-  };
-  const assets = getComponent('assets')(config);
-  const plugins = getComponent('plugins')(config, assets);
-
-  return {
-    env: config.env,
-
-    assets,
-    plugins,
-
-    isLocal: !IS_ONLINE[config.env],
-    isOnline: IS_ONLINE[config.env],
-    isVerbose: argv.verbose,
-    domain: assets.domain,
-
-    getPreference: assets.getPreference,
-    getVersion: getVersion(assets),
-    getChangelog: assets.generateChangelog,
-  };
-};
+module.exports = Setup;

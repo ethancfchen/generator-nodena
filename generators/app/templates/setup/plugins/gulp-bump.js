@@ -4,6 +4,7 @@
  * @module setup/plugins/gulp-bump
  */
 
+const _ = require('lodash');
 const semver = require('semver');
 
 /**
@@ -17,41 +18,46 @@ const semver = require('semver');
  * @param  {object} assets Project assets.
  * @return {object}        Plugins options.
  */
-module.exports = (config, assets) => {
-  const env = config.env;
-  const inputVer = config.argv.version;
-  const currentVer = assets.getPackageJsonVersion();
 
-  let liveVer = inputVer;
+class PluginGulpBump {
+  constructor(config, assets) {
+    const env = config.env;
+    const inputVer = config.argv.version;
+    const currentVer = assets.getPackageJsonVersion();
 
-  const options = {
-    stage: {
-      type: 'prerelease',
-      preid: 'stage',
-    },
-    live: {
-      version: liveVer,
-    },
-  };
+    let liveVer = inputVer;
 
-  switch (inputVer) {
-    case 'patch':
-      liveVer = semver.inc(currentVer, 'patch');
-      break;
-    case 'minor':
-      liveVer = semver.inc(currentVer, 'minor');
-      break;
-    case 'major':
-      liveVer = semver.inc(currentVer, 'major');
-      break;
-    default:
-      if (semver.valid(inputVer)) {
-        liveVer = inputVer;
-      } else {
+    const options = {
+      stage: {
+        type: 'prerelease',
+        preid: 'stage',
+      },
+      live: {
+        version: liveVer,
+      },
+    };
+
+    switch (inputVer) {
+      case 'patch':
         liveVer = semver.inc(currentVer, 'patch');
-      }
-  }
-  options.live.version = liveVer;
+        break;
+      case 'minor':
+        liveVer = semver.inc(currentVer, 'minor');
+        break;
+      case 'major':
+        liveVer = semver.inc(currentVer, 'major');
+        break;
+      default:
+        if (semver.valid(inputVer)) {
+          liveVer = inputVer;
+        } else {
+          liveVer = semver.inc(currentVer, 'patch');
+        }
+    }
+    options.live.version = liveVer;
 
-  return options[env];
-};
+    _.merge(this, options[env]);
+  }
+}
+
+module.exports = PluginGulpBump;
