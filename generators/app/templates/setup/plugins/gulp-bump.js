@@ -17,7 +17,7 @@ const semver = require('semver');
  * @param  {object} assets Project assets.
  * @return {object}        Plugins options.
  */
-module.exports = function(config, assets) {
+module.exports = (config, assets) => {
   const env = config.env;
   const inputVer = config.argv.version;
   const currentVer = assets.getPackageJsonVersion();

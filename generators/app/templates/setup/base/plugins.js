@@ -4,7 +4,7 @@ const _ = require('lodash');
 
 const PATH_PLUGINS = '../plugins';
 
-module.exports = function(config, assets) {
+module.exports = (config, assets) => {
   const pluginPath = path.resolve(__dirname, PATH_PLUGINS);
   const pluginFiles = fs.readdirSync(pluginPath);
   const options = {};

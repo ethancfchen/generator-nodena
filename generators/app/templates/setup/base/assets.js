@@ -70,7 +70,7 @@ function generateChangelog(log) {
     .replace('{log}', log);
 }
 
-module.exports = function(config) {
+module.exports = (config) => {
   return {
     manifest: MANIFEST,
     readme: README,

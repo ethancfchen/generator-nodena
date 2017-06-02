@@ -5,7 +5,7 @@ const del = require('del');
 
 const projectSetup = require('setup/setup');
 
-module.exports = function(cb) {
+module.exports = (cb) => {
   const setup = projectSetup({env: 'live'});
   const assets = setup.assets;
   const files = [

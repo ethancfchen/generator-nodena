@@ -25,7 +25,7 @@ function getVersion(assets) {
   };
 }
 
-module.exports = function(env) {
+module.exports = (env) => {
   const config = {
     env: env || argv.env || 'local',
     argv,
