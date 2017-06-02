@@ -14,7 +14,7 @@ class Assets {
     this._config = config;
     this._preference = 'setup.json';
     this._template = {
-      changelog: this.base.res + 'changelog.template.md',
+      changelog: 'res/changelog.template.md',
     };
 
     this.manifest = 'package.json';
