@@ -38,7 +38,7 @@
   "scripts": {
     "prepublish": "nsp check",
     "pretest": "eslint . --fix",
-    "test": "jest --config .jestrc"
+    "test": "jest --config .jestrc --coverage"
   },
   "repository": "https://github.com/ethancfchen/generator-nodena.git",
   "license": "MIT"
