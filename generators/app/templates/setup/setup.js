@@ -22,25 +22,25 @@ function getClass(fileName) {
 
 class Setup {
   constructor(env) {
-    const config = {
+    const options = {
       env: env || argv.env || 'local',
       argv,
     };
     const Assets = getClass('assets');
     const Plugins = getClass('plugins');
 
-    const assets = new Assets(config);
-    const plugins = new Plugins(config, assets);
+    const assets = new Assets(options);
+    const plugins = new Plugins(options, assets);
 
-    this.env = config.env;
+    this.env = options.env;
 
-    this.config = config;
+    this.config = options; // TODO Rename to options
 
     this.assets = assets;
     this.plugins = plugins;
 
-    this.isLocal = !IS_ONLINE[config.env];
-    this.isOnline = IS_ONLINE[config.env];
+    this.isLocal = !IS_ONLINE[options.env];
+    this.isOnline = IS_ONLINE[options.env];
     this.isVerbose = argv.verbose;
     this.domain = assets.domain;
   }

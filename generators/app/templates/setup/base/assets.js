@@ -57,15 +57,16 @@ class BaseAssets {
   }
 
   getDomain() {
-    const config = this._options;
+    const options = this._options;
     const pref = this.getPreference();
-    const prefEnv = pref[config.env] || {};
-    const localUrl = LOCALHOST + ':' + (config.argv.port || pref.server.port);
+    const prefEnv = pref[options.env] || {};
+    const localUrl =
+      LOCALHOST + ':' + (options.argv.port || pref.server.port);
 
     return prefEnv.domain || {
       local: localUrl,
       bypass: localUrl,
-    }[config.env];
+    }[options.env];
   }
 
   getPreference() {
