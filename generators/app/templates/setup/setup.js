@@ -3,6 +3,7 @@ const path = require('path');
 
 const argv = require('./argv');
 
+const PATH_BASE = './base/';
 const IS_ONLINE = {
   local: false,
   bypass: true,
@@ -16,7 +17,7 @@ function getClass(fileName) {
   if (fs.existsSync(file)) {
     return require('./' + fileName);
   }
-  return require('./base/' + fileName);
+  return require(PATH_BASE + fileName);
 }
 
 class Setup {

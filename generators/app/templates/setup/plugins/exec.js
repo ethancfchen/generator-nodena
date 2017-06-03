@@ -2,17 +2,12 @@
  * Plugin Setup: Common executions
  *
  * @module setup/plugins/exec
- */
-
-/**
- * Plugin Setup: Common executions
- *
  * @example {@lang javascript}
- * var exec = require('./plugins/exec')();
- * @return {object} Plugins options.
+ * const PluginExec = require('./plugins/exec');
+ * const pluginExec = new PluginExec(options, assets);
  */
 class PluginExec {
-  constructor(config, assets) {
+  constructor(options, assets) {
     this.maxBuffer = 1024 * 1024;
   }
 }

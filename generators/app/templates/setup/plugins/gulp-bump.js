@@ -1,42 +1,23 @@
-/**
- * Plugin Setup: gulp-bump
- *
- * @module setup/plugins/gulp-bump
- */
-
 const _ = require('lodash');
 const semver = require('semver');
 
 /**
  * Plugin Setup: gulp-bump
  *
+ * @module setup/plugins/gulp-bump
  * @example {@lang javascript}
- * var gulpBump = require('./plugins/gulp-bump')(config, assets);
+ * const PluginGulpBump = require('./plugins/gulp-bump');
+ * const pluginGulpBump = new PluginExec(options, assets);
  *
  * @see {@link https://github.com/stevelacy/gulp-bump/|Github}
- * @param  {object} config Project configurations.
- * @param  {object} assets Project assets.
- * @return {object}        Plugins options.
  */
-
 class PluginGulpBump {
-  constructor(config, assets) {
-    const env = config.env;
-    const inputVer = config.argv.version;
+  constructor(options, assets) {
+    const env = options.env;
+    const inputVer = options.argv.version;
     const currentVer = assets.getPackageJsonVersion();
 
     let liveVer = inputVer;
-
-    const options = {
-      stage: {
-        type: 'prerelease',
-        preid: 'stage',
-      },
-      live: {
-        version: liveVer,
-      },
-    };
-
     switch (inputVer) {
       case 'patch':
         liveVer = semver.inc(currentVer, 'patch');
@@ -54,9 +35,17 @@ class PluginGulpBump {
           liveVer = semver.inc(currentVer, 'patch');
         }
     }
-    options.live.version = liveVer;
 
-    _.merge(this, options[env]);
+    const result = {
+      stage: {
+        type: 'prerelease',
+        preid: 'stage',
+      },
+      live: {
+        version: liveVer,
+      },
+    };
+    _.merge(this, result[env]);
   }
 }
 

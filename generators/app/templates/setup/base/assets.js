@@ -1,6 +1,31 @@
 const fs = require('fs');
 const moment = require('moment');
 
+const MANIFEST = 'package.json';
+const README = 'README.md';
+const CHANGELOG = 'CHANGELOG.md';
+const TEMPLATE = {
+  changelog: 'res/changelog.template.md',
+};
+const BASE = {
+  src: 'src/',
+  temp: 'dist/',
+  online: 'online/',
+  res: 'res/',
+};
+const ONLINE = {
+  stage: BASE.online + 'stage/',
+  live: BASE.online + 'live/',
+  patches: BASE.online + 'patches/',
+};
+const DIST = {
+  local: BASE.temp,
+  bypass: BASE.temp,
+  stage: ONLINE.stage,
+  live: ONLINE.live,
+};
+const LOCALHOST = 'http://localhost';
+
 function readFile(path) {
   return fs.readFileSync(path, 'utf8');
 }
@@ -9,36 +34,20 @@ function readJsonFile(path) {
   return JSON.parse(readFile(path));
 }
 
-class Assets {
-  constructor(config) {
-    this._config = config;
+class BaseAssets {
+  constructor(options) {
+    this._options = options;
     this._preference = 'setup.json';
-    this._template = {
-      changelog: 'res/changelog.template.md',
-    };
+    this._template = TEMPLATE;
 
-    this.manifest = 'package.json';
-    this.readme = 'README.md';
-    this.changelog = 'CHANGELOG.md';
+    this.manifest = MANIFEST;
+    this.readme = README;
+    this.changelog = CHANGELOG;
 
-    this.base = {
-      src: 'src/',
-      temp: 'dist/',
-      online: 'online/',
-      res: 'res/',
-    };
+    this.base = BASE;
 
-    this.online = {
-      stage: this.base.online + 'stage/',
-      live: this.base.online + 'live/',
-      patches: this.base.online + 'patches/',
-    };
-    this.dist = {
-      local: this.base.temp,
-      bypass: this.base.temp,
-      stage: this.online.stage,
-      live: this.online.live,
-    }[this._config.env];
+    this.online = ONLINE;
+    this.dist = DIST[this._options.env];
 
     this.domain = this.getDomain();
   }
@@ -48,8 +57,7 @@ class Assets {
   }
 
   getDomain() {
-    const LOCALHOST = 'http://localhost';
-    const config = this._config;
+    const config = this._options;
     const pref = this.getPreference();
     const prefEnv = pref[config.env] || {};
     const localUrl = LOCALHOST + ':' + (config.argv.port || pref.server.port);
@@ -79,4 +87,4 @@ class Assets {
   }
 }
 
-module.exports = Assets;
+module.exports = BaseAssets;
