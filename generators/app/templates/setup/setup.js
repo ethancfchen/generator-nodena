@@ -34,8 +34,6 @@ class Setup {
 
     this.env = options.env;
 
-    this.config = options; // TODO Rename to options
-
     this.assets = assets;
     this.plugins = plugins;
 
