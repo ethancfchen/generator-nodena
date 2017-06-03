@@ -5,6 +5,7 @@ const semver = require('semver');
  * Plugin Setup: gulp-bump
  *
  * @module setup/plugins/gulp-bump
+ *
  * @example {@lang javascript}
  * const PluginGulpBump = require('./plugins/gulp-bump');
  * const pluginGulpBump = new PluginExec(options, assets);

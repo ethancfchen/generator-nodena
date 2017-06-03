@@ -2,6 +2,7 @@
  * Plugin Setup: Common executions
  *
  * @module setup/plugins/exec
+ *
  * @example {@lang javascript}
  * const PluginExec = require('./plugins/exec');
  * const pluginExec = new PluginExec(options, assets);
