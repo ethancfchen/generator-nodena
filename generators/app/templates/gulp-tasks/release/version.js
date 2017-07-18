@@ -1,5 +1,6 @@
 const gulp = require('gulp');
 const $ = require('gulp-load-plugins')();
+const pump = require('pump');
 
 const Setup = require('setup/setup');
 
@@ -11,8 +12,9 @@ module.exports = function() {
 
   const options = setup.plugins.gulpBump;
 
-  return gulp
-    .src(assets.manifest)
-    .pipe($.bump(options))
-    .pipe(gulp.dest('./'));
+  return pump([
+    gulp.src(assets.manifest),
+    $.bump(options),
+    gulp.dest('./'),
+  ]);
 };

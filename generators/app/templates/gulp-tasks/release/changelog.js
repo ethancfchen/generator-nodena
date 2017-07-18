@@ -4,7 +4,7 @@ const prependFile = require('prepend-file');
 
 const Setup = require('setup/setup');
 
-module.exports = function(cb) {
+module.exports = function(taskCallback) {
   const env = this.opts.env;
 
   const setup = new Setup(env);
@@ -20,7 +20,7 @@ module.exports = function(cb) {
     maxBuffer: optionsExec.maxBuffer,
   }, (err) => {
     if (err) {
-      return cb(err);
+      return taskCallback(err);
     }
     $.git.status({
       args: argsStatus,
@@ -28,12 +28,12 @@ module.exports = function(cb) {
     }, (err2, stdout) => {
       const message = setup.getChangelog(stdout);
       if (err2) {
-        return $.git.reset('HEAD', cb);
+        return $.git.reset('HEAD', taskCallback);
       }
       prependFile(assets.changelog, message);
       $.git.reset('HEAD', {
         maxBuffer: optionsExec.maxBuffer,
-      }, cb);
+      }, taskCallback);
     });
   });
 };

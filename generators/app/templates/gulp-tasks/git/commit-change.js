@@ -1,5 +1,6 @@
 const gulp = require('gulp');
 const $ = require('gulp-load-plugins')();
+const pump = require('pump');
 
 const Setup = require('setup/setup');
 
@@ -13,12 +14,13 @@ module.exports = function() {
 
   const optionsExec = setup.plugins.exec;
 
-  return gulp
-    .src([assets.dist, assets.manifest, assets.changelog])
-    .pipe($.git.add({
+  pump([
+    gulp.src([assets.dist, assets.manifest, assets.changelog]),
+    $.git.add({
       maxBuffer: optionsExec.maxBuffer,
-    }))
-    .pipe($.git.commit('[Online] ' + version, {
+    }),
+    $.git.commit('[Online] ' + version, {
       maxBuffer: optionsExec.maxBuffer,
-    }));
+    }),
+  ]);
 };

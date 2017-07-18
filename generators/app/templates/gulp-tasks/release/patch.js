@@ -6,7 +6,7 @@ const path = require('path');
 
 const Setup = require('setup/setup');
 
-module.exports = function(cb) {
+module.exports = function(taskCallback) {
   const env = this.opts.env;
 
   const setup = new Setup(env);
@@ -26,7 +26,7 @@ module.exports = function(cb) {
   }, (err, stdout) => {
     let files = [];
     if (err) {
-      return cb(err);
+      return taskCallback(err);
     }
     files = _(stdout.split('\n'))
       .compact()
@@ -37,6 +37,6 @@ module.exports = function(cb) {
     gulp
       .src(files, {cwd: assets.dist})
       .pipe(gulp.dest('./', {cwd: path.join(assets.online.patches, version)}));
-    cb(err, stdout);
+    taskCallback(err, stdout);
   });
 };
