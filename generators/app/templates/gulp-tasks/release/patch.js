@@ -34,8 +34,7 @@ module.exports = function(taskCallback) {
         return item.replace(assets.dist, '**');
       })
       .value();
-    gulp
-      .src(files, {cwd: assets.dist})
+    gulp.src(files, {cwd: assets.dist})
       .pipe(gulp.dest('./', {cwd: path.join(assets.online.patches, version)}));
     taskCallback(err, stdout);
   });

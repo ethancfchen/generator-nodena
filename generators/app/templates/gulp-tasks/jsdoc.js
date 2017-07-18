@@ -5,7 +5,7 @@ const del = require('del');
 
 const Setup = require('setup/setup');
 
-module.exports = function(cb) {
+module.exports = function(taskCallback) {
   const setup = new Setup({env: 'live'});
   const assets = setup.assets;
   const files = [
@@ -17,7 +17,6 @@ module.exports = function(cb) {
   ];
   del('./docs');
 
-  gulp
-    .src(files, {read: false})
-    .pipe($.jsdoc3(cb));
+  return gulp.src(files, {read: false})
+    .pipe($.jsdoc3(taskCallback));
 };
