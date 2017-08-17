@@ -19,4 +19,9 @@ module.exports = require('yargs').option({
     default: 'local',
     nargs: 1,
   },
+
+  preid: {
+    type: 'string',
+    nargs: 1,
+  },
 }).argv;

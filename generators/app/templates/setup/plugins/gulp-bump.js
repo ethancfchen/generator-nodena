@@ -1,4 +1,3 @@
-const _ = require('lodash');
 const semver = require('semver');
 
 /**
@@ -14,39 +13,19 @@ const semver = require('semver');
  */
 class PluginGulpBump {
   constructor(options, assets) {
-    const env = options.env;
     const inputVer = options.argv.version;
+    const preid = options.argv.preid;
     const currentVer = assets.getPackageJsonVersion();
 
-    let liveVer = inputVer;
-    switch (inputVer) {
-      case 'patch':
-        liveVer = semver.inc(currentVer, 'patch');
-        break;
-      case 'minor':
-        liveVer = semver.inc(currentVer, 'minor');
-        break;
-      case 'major':
-        liveVer = semver.inc(currentVer, 'major');
-        break;
-      default:
-        if (semver.valid(inputVer)) {
-          liveVer = inputVer;
-        } else {
-          liveVer = semver.inc(currentVer, 'patch');
-        }
+    let targetVer = inputVer;
+
+    if (semver.valid(inputVer)) {
+      targetVer = inputVer;
+    } else {
+      targetVer = semver.inc(currentVer, inputVer, preid);
     }
 
-    const result = {
-      stage: {
-        type: 'prerelease',
-        preid: 'stage',
-      },
-      live: {
-        version: liveVer,
-      },
-    };
-    _.merge(this, result[env]);
+    this.version = targetVer;
   }
 }
 
