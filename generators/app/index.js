@@ -3,6 +3,7 @@ const Generator = require('yeoman-generator');
 const mkdirp = require('mkdirp');
 const _ = require('lodash');
 const commandExists = require('command-exists');
+const sortPackageJson = require('sort-package-json');
 
 const ASSETS = {
   package: 'package.json',
@@ -34,11 +35,12 @@ function extendPackage(generator, template) {
   const extPackageFile = generator.templatePath(ASSETS.package);
   const manifest = generator.fs.readJSON(packageFile, {});
   const extManifest = generator.fs.readJSON(extPackageFile, {});
-  generator.fs.writeJSON(packageFile, _.merge(manifest, extManifest, {
+  const merged = _.merge(manifest, extManifest, {
     name: template.appname,
     description: template.appname,
     author: template.author,
-  }));
+  });
+  generator.fs.writeJSON(packageFile, sortPackageJson(merged));
 }
 
 function createFolders() {

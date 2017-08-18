@@ -32,6 +32,7 @@
   "dependencies": {
     "chalk": "^2.0.1",
     "command-exists": "^1.2.2",
+    "sort-package-json": "^1.7.0",
     "yeoman-generator": "^1.1.1",
     "yosay": "^2.0.0"
   },
