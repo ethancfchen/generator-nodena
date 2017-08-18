@@ -14,4 +14,4 @@ if (fs.existsSync(path.resolve(__dirname, PATH_TASK_LOADER))) {
   $.taskLoader();
 }
 
-gulp.task('default', ['local']);
+gulp.task('default', ['build']);

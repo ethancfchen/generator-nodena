@@ -12,13 +12,6 @@ module.exports = require('yargs').option({
     type: 'string',
     nargs: 1,
   },
-  e: {
-    alias: 'env',
-    type: 'string',
-    choices: ['local', 'bypass', 'stage', 'live'],
-    default: 'local',
-    nargs: 1,
-  },
 
   preid: {
     type: 'string',

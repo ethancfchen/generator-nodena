@@ -5,10 +5,10 @@
  *
  * @example {@lang javascript}
  * const PluginExec = require('./plugins/exec');
- * const pluginExec = new PluginExec(options, assets);
+ * const pluginExec = new PluginExec();
  */
 class PluginExec {
-  constructor(options, assets) {
+  constructor() {
     this.maxBuffer = 1024 * 1024;
   }
 }

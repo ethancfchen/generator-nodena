@@ -4,18 +4,15 @@ const $ = require('gulp-load-plugins')();
 const _ = require('lodash');
 const path = require('path');
 
-const Setup = require('setup/setup');
+const setup = require('setup/setup');
 
 module.exports = function(taskCallback) {
-  const env = this.opts.env;
-
-  const setup = new Setup(env);
   const assets = setup.assets;
 
   const version = setup.getVersion();
   const command = [
     'diff-tree', '-r', '--name-only', '--no-commit-id',
-    'HEAD', '--', assets.dist,
+    'HEAD', '--', assets.build,
   ].join(' ');
 
   const optionsExec = setup.plugins.exec;
@@ -31,10 +28,10 @@ module.exports = function(taskCallback) {
     files = _(stdout.split('\n'))
       .compact()
       .map((item) => {
-        return item.replace(assets.dist, '**');
+        return item.replace(assets.build, '**');
       })
       .value();
-    gulp.src(files, {cwd: assets.dist})
+    gulp.src(files, {cwd: assets.build})
       .pipe(gulp.dest('./', {cwd: path.join(assets.online.patches, version)}));
     taskCallback(err, stdout);
   });

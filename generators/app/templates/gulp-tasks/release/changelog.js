@@ -2,16 +2,13 @@ const $ = require('gulp-load-plugins')();
 
 const prependFile = require('prepend-file');
 
-const Setup = require('setup/setup');
+const setup = require('setup/setup');
 
 module.exports = function(taskCallback) {
-  const env = this.opts.env;
-
-  const setup = new Setup(env);
   const assets = setup.assets;
 
-  const commandAdd = ['add', assets.dist].join(' ');
-  const argsStatus = ['--porcelain', '--', assets.dist].join(' ');
+  const commandAdd = ['add', assets.build].join(' ');
+  const argsStatus = ['--porcelain', '--', assets.build].join(' ');
 
   const optionsExec = setup.plugins.exec;
 

@@ -1,17 +1,18 @@
+const _ = require('lodash');
 const fs = require('fs');
 const path = require('path');
 
+const config = require('config');
 const argv = require('./argv');
 
-const PATH_BASE = './base/';
-const IS_ONLINE = {
-  local: false,
-  bypass: true,
-  stage: true,
-  live: true,
-};
+const AssetsHelper = getClass('assets-helper');
+const Plugins = getClass('plugins');
+
+const assetsHelper = new AssetsHelper(config.assets);
+const plugins = new Plugins(assetsHelper);
 
 function getClass(fileName) {
+  const PATH_BASE = './base/';
   const file = path.resolve(__dirname, fileName + '.js');
 
   if (fs.existsSync(file)) {
@@ -20,40 +21,16 @@ function getClass(fileName) {
   return require(PATH_BASE + fileName);
 }
 
-class Setup {
-  constructor(env) {
-    const options = {
-      env: env || argv.env || 'local',
-      argv,
-    };
-    const Assets = getClass('assets');
-    const Plugins = getClass('plugins');
-
-    const assets = new Assets(options);
-    const plugins = new Plugins(options, assets);
-
-    this.env = options.env;
-
-    this.assets = assets;
-    this.plugins = plugins;
-
-    this.isLocal = !IS_ONLINE[options.env];
-    this.isOnline = IS_ONLINE[options.env];
-    this.isVerbose = argv.verbose;
-    this.domain = assets.domain;
-  }
-
-  getPreference() {
-    return this.assets.getPreference();
-  }
+module.exports = _.merge(config, {
+  argv,
+  assets: assetsHelper,
+  plugins,
 
   getVersion() {
-    return 'v' + this.assets.getPackageJsonVersion();
-  }
+    return 'v' + assetsHelper.getPackageJsonVersion();
+  },
 
   getChangelog(log) {
-    return this.assets.generateChangelog(log);
-  }
-}
-
-module.exports = Setup;
+    return assetsHelper.generateChangelog(log);
+  },
+});

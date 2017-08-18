@@ -1,5 +1,7 @@
 const semver = require('semver');
 
+const argv = require('../argv');
+
 /**
  * Plugin Setup: gulp-bump
  *
@@ -7,15 +9,15 @@ const semver = require('semver');
  *
  * @example {@lang javascript}
  * const PluginGulpBump = require('./plugins/gulp-bump');
- * const pluginGulpBump = new PluginExec(options, assets);
+ * const pluginGulpBump = new PluginExec(assetsHelper);
  *
  * @see {@link https://github.com/stevelacy/gulp-bump/|Github}
  */
 class PluginGulpBump {
-  constructor(options, assets) {
-    const inputVer = options.argv.version;
-    const preid = options.argv.preid;
-    const currentVer = assets.getPackageJsonVersion();
+  constructor(assetsHelper) {
+    const inputVer = argv.version;
+    const preid = argv.preid;
+    const currentVer = assetsHelper.getPackageJsonVersion();
 
     let targetVer = inputVer;
 

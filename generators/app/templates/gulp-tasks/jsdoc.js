@@ -3,10 +3,9 @@ const $ = require('gulp-load-plugins')();
 
 const del = require('del');
 
-const Setup = require('setup/setup');
+const setup = require('setup/setup');
 
 module.exports = function(taskCallback) {
-  const setup = new Setup({env: 'live'});
   const assets = setup.assets;
   const files = [
     assets.changelog,
