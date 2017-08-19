@@ -9,7 +9,6 @@ const appAssets = [
   'gulp-tasks/release/changelog.js',
   'gulp-tasks/release/patch.js',
   'gulp-tasks/release/version.js',
-  'gulp-tasks/build.js',
   'gulp-tasks/jsdoc.js',
   'setup',
   'setup/base',
