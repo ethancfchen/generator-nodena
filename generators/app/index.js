@@ -9,9 +9,7 @@ const ASSETS = {
   package: 'package.json',
   mkdirp: [
     'gulp-tasks',
-    'gulp-tasks/build',
     'setup',
-    'res',
     'src',
   ],
   copy: [{
@@ -20,12 +18,8 @@ const ASSETS = {
   }, {
     src: 'setup/**/*',
     dest: 'setup',
-  }, {
-    src: 'res/**/*',
-    dest: 'res',
   }],
   copyTpl: [
-    'CHANGELOG.md',
     'gulpfile.js',
   ],
 };

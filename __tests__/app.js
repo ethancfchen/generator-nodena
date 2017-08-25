@@ -4,11 +4,7 @@ const helpers = require('yeoman-test');
 
 const appAssets = [
   'gulp-tasks',
-  'gulp-tasks/build',
-  'gulp-tasks/release',
-  'gulp-tasks/release/changelog.js',
-  'gulp-tasks/release/patch.js',
-  'gulp-tasks/release/version.js',
+  'gulp-tasks/version.js',
   'gulp-tasks/jsdoc.js',
   'setup',
   'setup/base',
@@ -19,10 +15,7 @@ const appAssets = [
   'setup/plugins/gulp-bump.js',
   'setup/argv.js',
   'setup/setup.js',
-  'res',
-  'res/changelog.template.md',
   'src',
-  'CHANGELOG.md',
   'gulpfile.js',
   'package.json',
 ];
