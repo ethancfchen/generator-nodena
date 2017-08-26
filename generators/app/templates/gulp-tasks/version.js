@@ -16,6 +16,8 @@ module.exports = function() {
       gutil.log(setup.getVersion());
       gulp.src(assets.manifest)
         .pipe($.git.commit(setup.getVersion()))
-        .pipe($.git.tag(setup.getVersion()));
+        .on('data', () => {
+          $.git.tag(setup.getVersion());
+        });
     });
 };
