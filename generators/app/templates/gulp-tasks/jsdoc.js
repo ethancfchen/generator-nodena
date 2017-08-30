@@ -5,17 +5,11 @@ const del = require('del');
 
 const setup = require('setup/setup');
 
-module.exports = function(taskCallback) {
+module.exports = function() {
   const assets = setup.assets;
-  const files = [
-    assets.changelog,
-    assets.readme,
-    './*.js',
-    './setup/**/*.js',
-    './src/js/**/*.js',
-  ];
-  del('./docs');
+  const files = assets.jsdoc.files;
+  del(assets.jsdoc.dest);
 
   return gulp.src(files, {read: false})
-    .pipe($.jsdoc3(taskCallback));
+    .pipe($.jsdoc3());
 };

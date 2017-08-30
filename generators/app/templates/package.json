@@ -16,6 +16,7 @@
     "gulp": "^3.9.1",
     "gulp-bump": "^2.7.0",
     "gulp-git": "^2.4.0",
+    "gulp-jsdoc3": "^1.0.1",
     "gulp-load-plugins": "^1.5.0",
     "gulp-task-loader": "^1.4.4",
     "gulp-util": "^3.0.8",
