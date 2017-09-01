@@ -29,8 +29,4 @@ module.exports = _.merge(config, {
   getVersion() {
     return 'v' + assetsHelper.getPackageJsonVersion();
   },
-
-  getChangelog(log) {
-    return assetsHelper.generateChangelog(log);
-  },
 });
