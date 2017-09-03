@@ -2,7 +2,14 @@
   "name": "generator-nodena",
   "version": "0.5.2",
   "description": "Nodena basic Yeoman generator",
+  "keywords": [
+    "gulp",
+    "nodena",
+    "scaffold",
+    "yeoman-generator"
+  ],
   "homepage": "https://github.com/ethancfchen/generator-nodena",
+  "license": "MIT",
   "author": {
     "name": "ethancfchen",
     "email": "ethan.cfchen@gmail.com",
@@ -12,12 +19,20 @@
     "generators"
   ],
   "main": "generators/index.js",
-  "keywords": [
-    "scaffold",
-    "gulp",
-    "nodena",
-    "yeoman-generator"
-  ],
+  "repository": "https://github.com/ethancfchen/generator-nodena.git",
+  "scripts": {
+    "prepublish": "nsp check",
+    "release": "git push && git push --tags",
+    "pretest": "eslint . --fix",
+    "test": "jest --config .jestrc.js --coverage"
+  },
+  "dependencies": {
+    "chalk": "^2.0.1",
+    "command-exists": "^1.2.2",
+    "sort-package-json": "^1.7.0",
+    "yeoman-generator": "^1.1.1",
+    "yosay": "^2.0.0"
+  },
   "devDependencies": {
     "coveralls": "^2.13.1",
     "eslint": "^4.5.0",
@@ -28,20 +43,5 @@
     "nsp": "^2.6.3",
     "yeoman-assert": "^3.0.0",
     "yeoman-test": "^1.7.0"
-  },
-  "dependencies": {
-    "chalk": "^2.0.1",
-    "command-exists": "^1.2.2",
-    "sort-package-json": "^1.7.0",
-    "yeoman-generator": "^1.1.1",
-    "yosay": "^2.0.0"
-  },
-  "scripts": {
-    "prepublish": "nsp check",
-    "pretest": "eslint . --fix",
-    "test": "jest --config .jestrc.js --coverage",
-    "release": "git push && git push --tags"
-  },
-  "repository": "https://github.com/ethancfchen/generator-nodena.git",
-  "license": "MIT"
+  }
 }
