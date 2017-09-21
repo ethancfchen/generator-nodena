@@ -12,6 +12,7 @@
     "config": "^1.26.2",
     "del": "^3.0.0",
     "eslint": "^4.7.1",
+    "eslint-config-google": "^0.9.1",
     "eslint-config-xo-space": "^0.16.0",
     "gulp": "^3.9.1",
     "gulp-bump": "^2.7.0",
