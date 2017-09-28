@@ -1,15 +1,17 @@
 const gulp = require('gulp');
 const $ = require('gulp-load-plugins')();
 
-const GulpRegistry = require('undertaker-forward-reference');
+const fs = require('fs');
+const path = require('path');
 
-const browserSync = require('browser-sync').create();
+const PATH_TASK_LOADER = 'gulptasks.js';
 
 require('rootpath')();
 
-gulp.registry(new GulpRegistry());
-$.loadAllTasks({
-  browserSync,
-});
+if (fs.existsSync(path.resolve(__dirname, PATH_TASK_LOADER))) {
+  require(path.resolve(__dirname, PATH_TASK_LOADER))();
+} else {
+  $.taskLoader();
+}
 
-gulp.task('default', gulp.series('build'));
+gulp.task('default', ['build']);
