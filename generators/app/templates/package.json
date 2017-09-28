@@ -26,6 +26,6 @@
     "rootpath": "^0.1.2",
     "run-sequence": "^2.2.0",
     "semver": "^5.4.1",
-    "yargs": "^8.0.2"
+    "yargs": "^9.0.1"
   }
 }
