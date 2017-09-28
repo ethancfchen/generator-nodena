@@ -1,4 +1,3 @@
-const gulp = require('gulp');
 const $ = require('gulp-load-plugins')();
 
 const fs = require('fs');
@@ -13,5 +12,3 @@ if (fs.existsSync(path.resolve(__dirname, PATH_TASK_LOADER))) {
 } else {
   $.loadAllTasks();
 }
-
-gulp.task('default', ['build']);
