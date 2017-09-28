@@ -11,7 +11,7 @@ require('rootpath')();
 if (fs.existsSync(path.resolve(__dirname, PATH_TASK_LOADER))) {
   require(path.resolve(__dirname, PATH_TASK_LOADER))();
 } else {
-  $.taskLoader();
+  $.loadAllTasks();
 }
 
 gulp.task('default', ['build']);
