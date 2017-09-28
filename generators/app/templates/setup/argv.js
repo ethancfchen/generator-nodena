@@ -1,7 +1,7 @@
 const NODE_ENV = process.env.NODE_ENV;
 const NODE_APP_INSTANCE = process.env.NODE_APP_INSTANCE;
 
-module.exports = require('yargs').version(false).option({
+module.exports = require('yargs').option({
   b: {
     alias: 'verbose',
   },
