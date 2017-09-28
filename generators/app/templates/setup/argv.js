@@ -10,8 +10,8 @@ module.exports = require('yargs').version(false).option({
     type: 'number',
     nargs: 1,
   },
-  v: {
-    alias: 'version',
+  n: {
+    alias: 'new-version',
     type: 'string',
     nargs: 1,
     default: 'prerelease',

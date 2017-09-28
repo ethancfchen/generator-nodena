@@ -15,7 +15,7 @@ const argv = require('../argv');
  */
 class PluginGulpBump {
   constructor(assetsHelper) {
-    const inputVer = argv.version;
+    const inputVer = argv.newVersion;
     const preid = argv.preid;
     const currentVer = assetsHelper.getPackageJsonVersion();
 
