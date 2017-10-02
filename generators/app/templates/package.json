@@ -24,7 +24,6 @@
     "lodash": "^4.17.4",
     "moment": "^2.18.1",
     "rootpath": "^0.1.2",
-    "run-sequence": "^2.2.0",
     "semver": "^5.4.1",
     "undertaker-forward-reference": "^1.0.1",
     "yargs": "^9.0.1"
