@@ -30,12 +30,12 @@
     "chalk": "^2.0.1",
     "command-exists": "^1.2.2",
     "sort-package-json": "^1.7.1",
-    "yeoman-generator": "^2.0.0",
+    "yeoman-generator": "^2.0.1",
     "yosay": "^2.0.0"
   },
   "devDependencies": {
-    "coveralls": "^2.13.2",
-    "eslint": "^4.7.2",
+    "coveralls": "^3.0.0",
+    "eslint": "^4.8.0",
     "eslint-config-google": "^0.9.1",
     "eslint-config-xo-space": "^0.16.0",
     "jest": "^21.2.1",
