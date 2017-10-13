@@ -15,7 +15,7 @@
     "eslint-config-google": "^0.9.1",
     "eslint-config-xo-space": "^0.16.0",
     "gulp": "gulpjs/gulp#4.0",
-    "gulp-bump": "^2.7.0",
+    "gulp-bump": "^2.8.0",
     "gulp-git": "^2.4.2",
     "gulp-jsdoc3": "^1.0.1",
     "gulp-load-all-tasks": "^0.1.3",
