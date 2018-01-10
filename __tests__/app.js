@@ -4,8 +4,8 @@ const helpers = require('yeoman-test');
 
 const appAssets = [
   'gulp-tasks',
+  'gulp-tasks/tool/jsdoc.js',
   'gulp-tasks/version.js',
-  'gulp-tasks/jsdoc.js',
   'setup',
   'setup/base',
   'setup/base/assets-helper.js',
