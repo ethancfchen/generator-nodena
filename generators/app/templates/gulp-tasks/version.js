@@ -1,8 +1,8 @@
 const fs = require('fs');
 const semver = require('semver');
+const log = require('fancy-log');
 const chalk = require('chalk');
 const gulp = require('gulp');
-const gutil = require('gulp-util'); // @Deprecated
 const $ = require('gulp-load-plugins')();
 
 const NODE_ENV = process.env.NODE_ENV;
@@ -90,9 +90,7 @@ module.exports = function() {
   const isNew = argv.new;
 
   return gulp.src(ASSETS.manifest)
-    .pipe(isNew ? $.bump({
-      version: getNewVersion(),
-    }) : gutil.noop())
+    .pipe($.if(isNew, $.bump({version: getNewVersion()})))
     .pipe(gulp.dest('./'))
     .on('end', () => {
       if (isNew) {
@@ -100,7 +98,7 @@ module.exports = function() {
           .then(gitCommit)
           .then(gitTag);
       } else {
-        gutil.log(`Package version ${chalk.magenta(version)}`);
+        log(`Package version ${chalk.magenta(version)}`);
       }
     });
 };
