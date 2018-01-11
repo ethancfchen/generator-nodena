@@ -13,7 +13,7 @@ const ASSETS = {
 
 const argv = require('yargs').option({
   n: {
-    alias: 'new',
+    alias: 'new-version',
     type: 'string',
     nargs: 1,
   },
@@ -33,7 +33,7 @@ function getVersion() {
 }
 
 function getNewVersion() {
-  const input = argv.new;
+  const input = argv.newVersion;
   const postfix = argv.preid;
   const current = getVersion();
   let target = input;
@@ -87,7 +87,7 @@ function gitTag() {
 
 module.exports = function() {
   const version = getVersion();
-  const isNew = argv.new;
+  const isNew = argv.newVersion;
 
   return gulp.src(ASSETS.manifest)
     .pipe($.if(isNew, $.bump({version: getNewVersion()})))
