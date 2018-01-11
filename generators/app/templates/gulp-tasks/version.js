@@ -87,7 +87,7 @@ function gitTag() {
 
 module.exports = function() {
   const version = getVersion();
-  const isNew = argv.newVersion;
+  const isNew = argv.newVersion !== undefined;
 
   return gulp.src(ASSETS.manifest)
     .pipe($.if(isNew, $.bump({version: getNewVersion()})))
