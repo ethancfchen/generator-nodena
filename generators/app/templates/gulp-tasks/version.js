@@ -96,7 +96,8 @@ module.exports = function() {
       if (isNew) {
         gitAdd()
           .then(gitCommit)
-          .then(gitTag);
+          .then(gitTag)
+          .catch((error) => console.error(error));
       } else {
         log(`Package version ${chalk.magenta(version)}`);
       }
