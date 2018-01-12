@@ -1,12 +1,10 @@
+const del = require('del');
 const gulp = require('gulp');
 const $ = require('gulp-load-plugins')();
-
-const del = require('del');
-
-const setup = require('setup/setup');
+const config = require('config');
 
 module.exports = function() {
-  const assets = setup.assets;
+  const assets = config.assets;
   const files = assets.jsdoc.files;
   del(assets.jsdoc.dest);
 
