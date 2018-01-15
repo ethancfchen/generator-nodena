@@ -32,16 +32,13 @@ function getVersion() {
   return 'v' + manifest.version;
 }
 
-function getNewVersion(argv) {
-  const input = argv.newVersion;
-  const postfix = argv.preid;
+function getNewVersion(newVersion, preid) {
   const current = getVersion();
-  let target = input;
-
-  if (semver.valid(input)) {
-    target = input;
+  let target = newVersion;
+  if (semver.valid(newVersion)) {
+    target = newVersion;
   } else {
-    target = semver.inc(current, input, postfix);
+    target = semver.inc(current, newVersion, preid);
   }
   return target;
 }
@@ -50,10 +47,8 @@ function gitAdd() {
   const targetFile = ASSETS.manifest;
   const args = ['add', targetFile].join(' ');
   return new Promise((resolve, reject) => {
-    $.git.exec({args}, (error) => {
-      if (error) {
-        reject(error);
-      }
+    $.git.exec({args}, (error, stdout) => {
+      if (error) return reject(error);
       resolve();
     });
   });
@@ -63,10 +58,8 @@ function gitCommit() {
   const version = getVersion();
   const args = ['commit', '-m', version].join(' ');
   return new Promise((resolve, reject) => {
-    $.git.exec({args}, (error) => {
-      if (error) {
-        reject(error);
-      }
+    $.git.exec({args}, (error, stdout) => {
+      if (error) return reject(error);
       resolve();
     });
   });
@@ -76,10 +69,8 @@ function gitTag() {
   const version = getVersion();
   const args = ['tag', '-a', version, '-m', version].join(' ');
   return new Promise((resolve, reject) => {
-    $.git.exec({args}, (error) => {
-      if (error) {
-        reject(error);
-      }
+    $.git.exec({args}, (error, stdout) => {
+      if (error) return reject(error);
       resolve();
     });
   });
@@ -87,15 +78,19 @@ function gitTag() {
 
 module.exports = function() {
   const argv = yargs.option(ARGV_SETUP).argv;
+  const newVersion = argv.newVersion;
+  const preid = argv.preid;
+  const isNew = newVersion !== undefined;
   return gulp.src(ASSETS.manifest)
-    .pipe($.if(argv.newVersion !== undefined,
-      $.bump({version: getNewVersion(argv)})))
+    .pipe($.if(isNew, $.bump({version: getNewVersion(newVersion, preid)})))
     .pipe(gulp.dest('./'))
     .on('end', () => {
+      if (!isNew) {
+        return log(`Package version ${chalk.magenta(getVersion())}`);
+      }
       gitAdd()
         .then(gitCommit)
         .then(gitTag)
         .catch((error) => console.error(error));
-      log(`Package version ${chalk.magenta(getVersion())}`);
     });
 };
