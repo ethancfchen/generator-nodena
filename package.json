@@ -27,21 +27,21 @@
     "test": "jest --config .jestrc.js --coverage"
   },
   "dependencies": {
-    "chalk": "^2.3.0",
+    "chalk": "^2.3.2",
     "command-exists": "^1.2.2",
-    "sort-package-json": "^1.7.1",
-    "yeoman-generator": "^2.0.2",
-    "yosay": "^2.0.0"
+    "sort-package-json": "^1.11.0",
+    "yeoman-generator": "^2.0.3",
+    "yosay": "^2.0.2"
   },
   "devDependencies": {
     "coveralls": "^3.0.0",
-    "eslint": "^4.17.0",
+    "eslint": "^4.19.1",
     "eslint-config-google": "^0.9.1",
-    "eslint-config-xo-space": "^0.17.0",
-    "jest": "^22.1.4",
-    "jest-cli": "^22.1.4",
-    "nsp": "^3.1.0",
-    "yeoman-assert": "^3.1.0",
+    "eslint-config-xo-space": "^0.18.0",
+    "jest": "^22.4.3",
+    "jest-cli": "^22.4.3",
+    "nsp": "^3.2.1",
+    "yeoman-assert": "^3.1.1",
     "yeoman-test": "^1.7.0"
   }
 }
